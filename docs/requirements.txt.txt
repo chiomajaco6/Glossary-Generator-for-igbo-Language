@@ -1,0 +1,60 @@
+If you are using jupyter notebook, remember to add ! (before pip) as show otherwise remove !
+
+To install jupyter notebook in your local machine the following instructions should be followed:
+
+Do not use jupyter notebook via pycharm or VS code.
+
+Use it as a standalone by following these steps to get it in use:
+
+Step to install jupyter notebook:
+
+1. Once you have installed python.
+2. Go to command prompt.
+
+type this:
+
+pip install jupyter
+
+then press enter.
+
+Wait for it to install
+
+It takes quite some time. Be patient. You must have enough data.
+
+To run your python code in jupyter notebook.
+
+type this:
+
+jupyter notebook
+
+You can use google colab or AWS (Cloud)
+
+then press enter.
+
+It will open in your browser.
+
+
+The old style will want you to install anaconda first but remember, the old things shall pass away
+
+
+The following packages are to be installed.
+
+!pip install numpy
+!pip install pandas
+!pip install scikit-learn
+!pip install matplotlib
+!pip install seaborn
+!pip install keras
+
+For the django app
+install django via command prompt following this code:
+Step 1: Download Python
+For Django to run, python is required. Hence, first of all download Python. However, if you have downloaded python in your system, you can start.
+Step 2: Install Django
+
+To install Django kindly use the code below:
+py -m pip install Django
+
+
+
+
