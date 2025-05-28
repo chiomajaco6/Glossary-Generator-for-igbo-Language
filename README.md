@@ -51,16 +51,9 @@ Supports both PyTorch (Trainer) and TensorFlow (Keras) backends
 Optimized input formatting: Igbo word + context ➝ explanation
 Includes preprocessing, training, and inference scripts
  Ideal for language researchers, data scientists, and lexicon developers
+ 
  Project Structure
 
-├── data/cleaned_igbo_dataset.csv         # Final training dataset  
-├── gloss_generator_pytorch.py            # Fine-tune T5 with PyTorch Trainer  
-├── gloss_generator_tensorflow.py         # Fine-tune T5 with TensorFlow model.fit  
-├── preprocess.py                         # Generate input_text and target_text  
-├── inference.py                          # Predict explanations using trained model  
-├── igbo_gloss_model/                     # Saved PyTorch model and tokenizer  
-├── igbo_gloss_model_tf/                  # Saved TensorFlow model and tokenizer  
-├── README.md                             # Documentation for GitHub  
 
  Dataset
 
@@ -112,6 +105,74 @@ This project demonstrates ability to:
 - Publish code with scalable and documented workflow
 
 # Methodology
+# Igbo Token Cleaning Script for Lexical Modeling
+🔍 Project Component: Dataset Preprocessing
+
+This script is part of the Igbo-to-Igbo Contextual Translation project, focused on low-resource NLP tasks for the Igbo language. It processes a tokenized Igbo dictionary dataset stored in Excel format by:
+
+Converting stringified tokens to Python lists
+
+Cleaning non-alphabetic and non-Igbo words
+
+Retaining valid Igbo tokens with tonal marks
+
+Generating a cleaned dataset for language modeling
+
+📝 Python Script: clean_igbo_tokens.py
+
+# Sample output
+| tokenized\_definition            | cleaned\_tokens                 |
+| -------------------------------- | ------------------------------- |
+| \['Abalị', 'uchichi', 'anyasị']  | \['abalị', 'uchichi', 'anyasị'] |
+| \['Ọchịchịrị.', 'Ehihie', 'laa'] | \['ọchịchịrị', 'ehihie', 'laa'] |
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+# Cleaning the Igbo Dataset to remove Noise from tokenized_definitiion colulmn such as non-word characters like:
+
+# '~', ':', '1', '2', '.', ',', etc. Removal of punctuation, numbers, mixed tokens, empty/whitespace only tokens
+
+This script cleans the tokenized_definition column in the Igbo language dataset to remove noisy, non-linguistic tokens such as:
+
+* Punctuation: ~, :, ., ,
+
+* Numbers: 1, 2, 10, etc.
+
+* Mixed or malformed tokens
+
+* Empty or whitespace-only entries
+
+The cleaned version is saved in a new column: cleaned_tokens.
+
+| Step                | Description                                                      |
+| ------------------- | ---------------------------------------------------------------- |
+| 1. 📥 Load Dataset  | Reads an Excel file containing tokenized Igbo word definitions   |
+| 2. 🔍 Define Filter | A regex keeps only valid Igbo tokens with letters and tone marks |
+| 3. 🧹 Clean Tokens  | Removes digits, punctuation, and non-Igbo patterns               |
+| 4. ➕ Add Column     | Appends a `cleaned_tokens` column with the filtered result       |
+
+🧪 Example
+# Before cleaning:
+['Nwoke', '1', ':', 'bụ', 'onye', '~', 'ọma.']
+
+# After cleaning:
+['nwoke', 'bụ', 'onye', 'ọma']
+
+📦 Dependencies
+# pip install pandas openpyxl
+
+🧠 Ideal For
+* Low-resource NLP preprocessing
+
+* Igbo language modeling
+
+* Lexicon and dictionary cleaning tasks
+
+* T5 / BERT fine-tuning input preparation
+
+
 
 ## PyTorch Implementation with HuggingFace Trainer
 

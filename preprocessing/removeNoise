@@ -1,0 +1,32 @@
+''' Cleaning the Igbo Dataset to remove Noise from tokenized_definitiion colulmn such as non-word characters like:
+
+# '~', ':', '1', '2', '.', ',', etc. Removal of punctuation, numbers, mixed tokens, empty/whitespace only tokens
+
+'''
+
+import pandas as pd
+import ast
+import re
+
+# Load your Excel file
+file_path = "C:/Users/hp/Desktop/MLs/IgboCorpora/data/okwumputaDataset.xlsx"
+df = pd.read_excel(file_path)
+
+# Define regex pattern to keep only Igbo-valid words (letters and tone characters)
+def is_valid_igbo_token(token):
+    # Keep only alphabetic and tonal characters (including accented vowels)
+    return re.match(r"^[a-zA-Zịọụñṅáéíóúʼ]+$", token)
+
+# Clean each tokenized definition
+def clean_token_list(token_str):
+    try:
+        tokens = ast.literal_eval(token_str)
+        return [t.lower().strip() for t in tokens if is_valid_igbo_token(t)]
+    except:
+        return []
+
+# Apply the cleaning function
+df['cleaned_tokens'] = df['tokenized_definition'].apply(clean_token_list)
+
+# Preview cleaned results
+df[['tokenized_definition', 'cleaned_tokens']].head()
